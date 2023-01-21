@@ -65,6 +65,7 @@ This Mobile-End project was developed using the following technologies:
 -   [Zod][zod]
 -   [NativeWind][nativewind]
 -   [Tailwind CSS][tailwindcss]
+-   [React Navigation][reactnavigation]
 
 
 
@@ -89,6 +90,7 @@ Feel free to bring new features or fix problems, it will be a pleasure! 💜
 [zod]: https://zod.dev/
 [radix-ui]: https://www.radix-ui.com/
 [reactnative]: https://reactnative.dev/
+[reactnavigation]: https://reactnavigation.org/
 [osanimation]: https://michalsnik.github.io/aos/
 [swiperjs]: https://swiperjs.com/react
 [next-auth]: https://next-auth.js.org/
