@@ -58,7 +58,7 @@ export async function appRoutes(app:FastifyInstance) {
           }
         }
       }
-    })
+    }) // faz 2 chamadas aqui
 
     const day = await prisma.day.findUnique({
       where: {
@@ -79,5 +79,101 @@ export async function appRoutes(app:FastifyInstance) {
     }
   })
 //================================================================//
+  app.patch('/habits/:id/toggle', async (req,res) => {
+    const getToggleParams = z.object({
+      id:z.string().uuid()
+    })
 
+    const { id } = getToggleParams.parse(req.params)
+    const today = dayjs().startOf('day').toDate()
+
+
+    let day = await prisma.day.findUnique({
+      where: {
+        date:today
+      }
+    })
+    if (!day) {
+      day = await prisma.day.create({
+        data: {
+          date:today,
+        }
+      })
+    }
+
+    //buscando ver se ja tinha marcado
+    const dayHabit = await prisma.dayHabit.findUnique({
+      where: {
+        day_id_habit_id: {
+          day_id: day.id,
+          habit_id: id
+        }
+      }
+    })
+    if (dayHabit) {
+      //remover a marcação de completo
+      await prisma.dayHabit.delete({
+        where: {
+          id: dayHabit.id
+        }
+      })
+    } else {
+      // completar o habito
+      await prisma.dayHabit.create({
+        data: {
+          day_id: day.id,
+          habit_id: id
+        }
+      })
+    }
+
+
+
+  })
+  //================================================================//
+  app.get('/summary', async (req, res) => {
+    // Query mais complexa , mais condições , relacionamentos => SQL na mao (RAW)
+    // PRISMA ORM : RAW SQL => SQLLite
+
+
+    //SELECT D.id , D.date FROM days D  => alias D para trazer oque eu quero com apelidos
+    // (sub query) , um query dentro de outra
+    // DH => alias para DayHabits
+    // contar quantos days tem em day_habits => ou seja
+    // as completed => e o alias para saber qual e o resultado completado na segunda query
+    // cast( as float) // converter de BigInt para float => SqlLite Cria em bigInt e o prisma tem um bug de nao entender
+    // () novamente outra subQuery amount => trazer todos os hábitos que estão disponível que estão disponível nesse dia da semana
+    // strftime função do SQLLite para trabalhar com datas
+    // date/1000.0 => pq e mil milissegundos
+    // fazer um join para trazer so os que estão disponível partir daquela date
+    // AND H.created_at <= D.date => menor ou igual
+
+    const summary = await prisma.$queryRaw`
+      SELECT
+        D.id ,
+        D.date,
+        (
+          SELECT
+            cast(count(*) as float)
+          FROM day_habits DH
+          WHERE DH.day_id = D.id
+        ) as completed,
+        (
+          SELECT
+            cast(count(*) as float)
+          FROM habit_week_days HWD
+          JOIN habits H
+            ON H.id = HWD.habit_id
+          WHERE
+            HWD.week_day = cast(strftime('%W',D.date/1000.0, 'unixepoch') as int)
+            AND H.created_at <= D.date
+        ) as amount
+      FROM days D
+    `
+    //SQL Date => epoch timestamp
+
+    return summary
+
+  })
+  //================================================================//
 }
