@@ -37,17 +37,36 @@ This Front-End project was developed using the following technologies:
 
 -   [Vite Js][vitejs]
 -   [Typescript][typescript]
+-   [dayjs][dayjs]
+-   [Radix-Ui][radix-ui]
+-   [Zod][zod]
+-   [Phosphor-icons][phosphoricons]
+-   [Tailwind CSS][tailwindcss]
+-   [Clsx][clsx]
 
 
 This Back-End project was developed using the following technologies:
 
 
 -   [Typescript][typescript]
+-   [Fastify][fastify]
+-   [dayjs][dayjs]
+-   [Zod][zod]
+-   [Prisma ORM][prisma]
+
 
 
 This Mobile-End project was developed using the following technologies:
 
+-   [React Native][reactnative]
+-   [Expo][expo]
 -   [Typescript][typescript]
+-   [dayjs][dayjs]
+-   [Zod][zod]
+-   [NativeWind][nativewind]
+-   [Tailwind CSS][tailwindcss]
+
+
 
 This project in under MIT license, for more details check in [LICENSE][license]. <br>
 Feel free to bring new features or fix problems, it will be a pleasure! 💜
@@ -59,7 +78,17 @@ Feel free to bring new features or fix problems, it will be a pleasure! 💜
 </div>
 
 [typescript]: https://www.typescriptlang.org/
+[fastify]: https://www.fastify.io/
+[tailwindcss]: https://tailwindcss.com/
+[clsx]: https://github.com/lukeed/clsx#readme
+[nativewind]: https://www.nativewind.dev/
+[prisma]: https://www.prisma.io/
 [nextjs]: https://nextjs.org/
+[dayjs]: https://day.js.org/
+[expo]: https://expo.dev/
+[zod]: https://zod.dev/
+[radix-ui]: https://www.radix-ui.com/
+[reactnative]: https://reactnative.dev/
 [osanimation]: https://michalsnik.github.io/aos/
 [swiperjs]: https://swiperjs.com/react
 [next-auth]: https://next-auth.js.org/
