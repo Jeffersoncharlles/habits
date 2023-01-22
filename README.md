@@ -69,11 +69,12 @@ This Mobile-End project was developed using the following technologies:
 
 
 
-This project in under MIT license, for more details check in [LICENSE][license]. <br>
-Feel free to bring new features or fix problems, it will be a pleasure! 💜
+
 
 
 <div align='center'>
+This project in under MIT license, for more details check in [LICENSE][license]. <br>
+Feel free to bring new features or fix problems, it will be a pleasure! 💜
   Made with 💚  by <strong>Jefferson Charlles</strong> 🔥
   <a href='https://www.linkedin.com/in/jeffersoncharlles/'>Get in touch!</a>
 </div>
