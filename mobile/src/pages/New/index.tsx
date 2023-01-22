@@ -25,7 +25,10 @@ export const New = ({ }: NewProps) => {
 
     return(
       <View className='flex-1 bg-background px-8 pt-16'>
-        <ScrollView showsVerticalScrollIndicator={false}>
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={{paddingBottom:100}}
+        >
           <BackButton />
           <Text className='mt-6 text-zinc-200 font-extrabold text-3xl'>
             Criar Hábito
@@ -34,7 +37,7 @@ export const New = ({ }: NewProps) => {
             Qual seu comprometimento?
           </Text>
           <TextInput
-            className='h-12 pl-4 rounded-lg mt-3 bg-zinc-800 text-zinc-200 focus:border-2 focus:border-violet-800'
+            className='h-12 pl-4 rounded-lg mt-3 bg-zinc-900 text-zinc-200 border-2 border-zinc-800 focus:border-2 focus:border-violet-800'
             placeholder='ex.: Execícios,dormir bem, etc...'
             placeholderTextColor={colors.zinc[500]}
           />

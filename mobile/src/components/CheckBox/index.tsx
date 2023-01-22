@@ -30,7 +30,7 @@ export const CheckBox = ({ checked=false,title,...rest }: CheckBoxProps) => {
             <View className='h-8 w-8 bg-zinc-800 rounded-lg' />
           )
         }
-        <Text className='text-zinc-300 ml-3'>
+        <Text className='text-zinc-300 ml-3 font-semibold'>
             {title}
         </Text>
 
