@@ -1,7 +1,7 @@
 import { Check } from "phosphor-react";
 import { useState } from "react";
 import * as CheckBox from '@radix-ui/react-checkbox';
-// import { Checkbox } from "../Checkbox";
+
 
 interface NewHabitForm {
 
@@ -9,7 +9,6 @@ interface NewHabitForm {
 
 const availableWeekDays = ['Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado']
 export const NewHabitForm = ({ }: NewHabitForm) => {
-  const [checked, setChecked] = useState('indeterminate');
   const [weekDays, setWeekDays] = useState<number[]>([]);
   const [title,setTitle] = useState('')
 

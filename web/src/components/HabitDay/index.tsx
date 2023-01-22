@@ -1,15 +1,17 @@
 import * as Popover from '@radix-ui/react-popover';
 import clsx from 'clsx'
-import { Checkbox } from '../Checkbox';
+import * as CheckBox from '@radix-ui/react-checkbox';
 import { ProgressBar } from '../ProgressBar';
+import { Check } from 'phosphor-react';
 
 interface HabitDayProps{
-  completed:number
-  amount:number
+  date: Date
+  completed?:number
+  amount?:number
 }
 
-export const HabitDay = ({ amount, completed }: HabitDayProps) => {
-  const completedPercentage = Math.round((completed / amount) * 100)
+export const HabitDay = ({ amount=0, completed=0 ,date}: HabitDayProps) => {
+  const completedPercentage = amount > 0 ? Math.round((completed / amount) * 100) : 0
 
   return (
       <Popover.Root>
@@ -30,9 +32,22 @@ export const HabitDay = ({ amount, completed }: HabitDayProps) => {
           <span className='mt-1 font-extrabold leading-tight text-zinc-400 text-3xl'>23/01</span>
           <ProgressBar progress={completedPercentage} />
           <div className="flex flex-col gap-3 mt-6">
-            <Checkbox title='Beber 2lt aguá'/>
-            <Checkbox title='Beber 2lt aguá'/>
-            <Checkbox title='Beber 2lt aguá'/>
+            <CheckBox.Root
+              className='flex items-center gap-3 group'
+            >
+              <div
+                className='h-8 w-8 rounded-lg flex items-center justify-center bg-zinc-900 border-2 border-zinc-800 group-data-[state=checked]:bg-green-500 group-data-[state=checked]:border-green-500'
+              >
+                <CheckBox.Indicator
+
+                >
+                  <Check size={20} className="text-green-800" weight='bold' />
+                </CheckBox.Indicator>
+              </div>
+              <span className='font-semibold text-xl text-zinc-300 leading-tight group-data-[state=checked]:line-through group-data-[state=checked]:text-zinc-500'>
+                beber
+              </span>
+            </CheckBox.Root>
 
           </div>
           <Popover.Arrow className='fill-zinc-900' height={8} width={16} />

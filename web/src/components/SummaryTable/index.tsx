@@ -1,3 +1,6 @@
+import dayjs from "dayjs";
+import { useEffect, useState } from "react";
+import { api } from "../../lib/axios";
 import { generateDatesFromYearBeginning } from "../../utils/generate-dates-from-year-beginning";
 import { HabitDay } from "../HabitDay";
 
@@ -5,11 +8,27 @@ interface SummaryTable {
 
 }
 
+const weekDays = ['D', 'S', 'T', 'Q', 'Q', 'S', 'S']
+const summaryDates = generateDatesFromYearBeginning()
+const minimumSummaryDatesSize = 18 * 7 // 18 weeks
+const amountOfDaysFill = minimumSummaryDatesSize - summaryDates.length //min - dates current
+
+type Summary = {
+  id:string
+  date:string
+  amount:number
+  completed:number
+}[]
+
+
 export const SummaryTable = ({ }: SummaryTable) => {
-  const weekDays = ['D', 'S', 'T', 'Q', 'Q', 'S', 'S']
-  const summaryDates = generateDatesFromYearBeginning()
-  const minimumSummaryDatesSize = 18 * 7 // 18 weeks
-  const amountOfDaysFill = minimumSummaryDatesSize - summaryDates.length //min - dates current
+  const [summary, setSummary] = useState<Summary>([])
+
+
+  useEffect(() => {
+    api.get('/summary').then(response=>setSummary(response.data))
+  },[])
+
 
     return(
       <section className="w-full flex">
@@ -21,13 +40,17 @@ export const SummaryTable = ({ }: SummaryTable) => {
           ))}
         </header>
         <main className="grid grid-rows-7 grid-flow-col gap-3">
-          {summaryDates.map((date,index) => (
-            <HabitDay
-              key={String(date)}
-              amount={5}
-              completed={Math.round(Math.random() *5)}
-            />
-          ))}
+          {summaryDates.map((date, index) => {
+            const dayInSummary = summary.find(day => dayjs(date).isSame(day.date, 'day'))
+            return (
+              <HabitDay
+                key={String(date)}
+                amount={dayInSummary?.amount}
+                completed={dayInSummary?.completed}
+                date={date}
+              />
+            )
+          })}
 
           {amountOfDaysFill > 0 && Array.from({ length: amountOfDaysFill }).map((_,i) => {
             //days no exists disable

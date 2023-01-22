@@ -74,7 +74,7 @@ async function run() {
     prisma.day.create({
       data: {
         /** Monday */
-        date: new Date('2023-01-02T03:00:00.000z'),
+        date: new Date('2023-01-22T03:00:00.000z'),
         dayHabit: {
           create: {
             habit_id: firstHabitId,
@@ -89,7 +89,7 @@ async function run() {
     prisma.day.create({
       data: {
         /** Friday */
-        date: new Date('2023-01-06T03:00:00.000z'),
+        date: new Date('2023-01-20T03:00:00.000z'),
         dayHabit: {
           create: {
             habit_id: firstHabitId,
@@ -104,7 +104,7 @@ async function run() {
     prisma.day.create({
       data: {
         /** Wednesday */
-        date: new Date('2023-01-04T03:00:00.000z'),
+        date: new Date('2023-01-18T03:00:00.000z'),
         dayHabit: {
           create: [
             { habit_id: firstHabitId },
