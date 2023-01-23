@@ -11,10 +11,10 @@
   <a href="#key-license">License</a>
 </p>
 
-<!-- <h1 align='center'>
-  <img src='./screen/chrome_b4BLWvvnY9.gif' width="480">
+<h1 align='center'>
+  <img src='./screen/Screenshot_1674356561.png' width="480">
   <img src='./screen/mXhIcTA3Qz.jpg'  height="720">
-</h1> -->
+</h1>
 
 ## Getting Started
 
@@ -66,7 +66,7 @@ This Mobile-End project was developed using the following technologies:
 -   [NativeWind][nativewind]
 -   [Tailwind CSS][tailwindcss]
 -   [React Navigation][reactnavigation]
-
+-   [Clsx][clsx]
 
 
 
