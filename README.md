@@ -12,8 +12,7 @@
 </p>
 
 <h1 align='center'>
-  <img src='./screen/Screenshot_1674356561.png' width="480">
-  <img src='./screen/mXhIcTA3Qz.jpg'  height="720">
+  <img src='./screen/Screenshot_1674356561.png' height="320">
 </h1>
 
 ## Getting Started
