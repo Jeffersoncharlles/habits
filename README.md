@@ -13,6 +13,7 @@
 
 <h1 align='center'>
   <img src='./screen/Screenshot_1674356561.png' height="320">
+  <img src='./screen/bFK16jwDg6.png' height="320">
 </h1>
 
 ## Getting Started

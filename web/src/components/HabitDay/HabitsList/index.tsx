@@ -5,7 +5,8 @@ import { api } from '../../../lib/axios';
 import dayjs from 'dayjs';
 
 interface HabitListProps{
-  date:Date
+  date: Date;
+  onCompletedChange:(completed:number)=>void
 }
 interface HabitsInfo {
   posableHabits: {
@@ -16,8 +17,14 @@ interface HabitsInfo {
   completedHabits: string[];
 }
 
-export const HabitList = ({ date }: HabitListProps) => {
+export const HabitList = ({ date, onCompletedChange }: HabitListProps) => {
   const [habitsInfo, setHabitsInfo] = useState<HabitsInfo>()
+
+
+
+  useEffect(() => {
+    getList(date)
+  }, [])
 
   const getList = async (date:Date) => {
    const response = await api.get('day', {
@@ -29,17 +36,34 @@ export const HabitList = ({ date }: HabitListProps) => {
     setHabitsInfo(response.data)
   }
 
+  const handleToggleHabit = async (habit_id:string) => {
+    const isHabitAlreadyCompleted = habitsInfo!.completedHabits.includes(habit_id)
+    await api.patch(`habits/${habit_id}/toggle`)
+
+    let completedHabits: string[] = []
+    if (isHabitAlreadyCompleted) {
+      //remover da lista
+      completedHabits = habitsInfo!.completedHabits.filter(id => id !== habit_id)
+    } else {
+      //adicionar na lista
+      completedHabits = [...habitsInfo!.completedHabits, habit_id]
+    }
+    setHabitsInfo({ posableHabits: habitsInfo!.posableHabits, completedHabits })
+
+    onCompletedChange(completedHabits.length)
+  }
+
   const isDateInPast = dayjs(date).endOf('day').isBefore(new Date())
 
-  useEffect(() => {
-    getList(date)
-  }, [])
+
+
 
     return(
       <div className="flex flex-col gap-3 mt-6">
         {habitsInfo?.posableHabits.map((habit) => (
           <CheckBox.Root
-            className='flex items-center gap-3 group'
+            className='flex items-center gap-3 group disabled:hover:cursor-not-allowed disabled:hover:bg-zinc-800/30 hover:transition-colors'
+            onCheckedChange={() => handleToggleHabit(habit.id)}
             key={habit.id}
             disabled={isDateInPast}
             checked={habitsInfo.completedHabits.includes(habit.id)}
